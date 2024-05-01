@@ -1,52 +1,61 @@
-<!-- 
-    This page is clone of the "freecatphotoapp.com" website
-    This is not my original creation
- -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Cat Photo App</title>
-        <style>
-            body {
-                font-family:'Courier New', Courier, monospace;
-                text-align: center;
-            }
-            figure {
-                display: inline-block; 
-                width: 30%;
-                margin-bottom: 5%;
-            }
-            .cat-image {
-                display: inline-block;
-                width: 100%;
-                height: auto;
-            }
-            footer {
-                font-size: 0.9em;
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>Cat Photos</h1>
-        </header>
-        <section>
-            <figure>
-                <img class="cat-image" src="images/alexis-chloe-dD75iU5UAU4-unsplash.jpg" alt="dog loking cat photo">
-                <figcaption>
-                    Dog is looking at the cat
-                </figcaption>
-            </figure>
-            <figure>
-                <img class="cat-image" src="images/patrick-reichboth-YKCwVVF5PxM-unsplash.jpg" alt="Brown very hair cat">
-                <figcaption>
-                    Brown hairy cat doing exercise
-                </figcaption>
-            </figure>
-        </section>
-        <footer>
-            Create By Nishan Bhattarai  <br>
-            &#169;CatPhotoApp
-        </footer>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+    <header>
+        <h1>Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#works">Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <img src="images/me.jpg" alt="Photo of Nishan Bhattarai">
+            <div class="about-me-text">
+                <h2>I am Nishan</h2>
+                <p>I am a computer engineering student who is interested in web 
+                    development as well as any kind of software development. I 
+                    am passionate about creating innovative and user-friendly 
+                    applications. I enjoy learning new technologies and 
+                    exploring different programming languages. With a strong 
+                    foundation in computer science principles, I strive to 
+                    continuously improve my skills and contribute to the field 
+                    of software development.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="works">
+        <div class="container">
+            <h2>My Works</h2>
+            <p>Add your projects and works here.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Add your contact information here.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name</p>
+        </div>
+    </footer>
+
+    <script src="script/main.js"></script>
+</body>
 </html>
