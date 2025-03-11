@@ -2,6 +2,8 @@
 
 A personal portfolio website showcasing my skills, projects, and contact information.
 
+**Live Website:** [https://nishanbhattarai327.github.io/](https://nishanbhattarai327.github.io/)
+
 ## Overview
 
 This portfolio website is designed to present my professional background, showcase my work, and provide a way for potential employers or clients to contact me. The site features a clean, responsive design with easy navigation.
@@ -64,9 +66,8 @@ To make changes to the site:
 
 ## Deployment
 
-This site is deployed using GitHub Pages. Any changes pushed to the main branch will be automatically deployed to the live site.
+This site is deployed using GitHub Pages. Any changes pushed to the main branch will be automatically deployed to the live site at [https://nishanbhattarai327.github.io/](https://nishanbhattarai327.github.io/).
 
 ## Author
 
 Nishan Bhattarai - Computer Engineering Student
-
