@@ -34,11 +34,10 @@ async function fetchGitHubRepos() {
 /**
  * Creates a project card from repository data
  */
-function createProjectCard(repo) {
+async function createProjectCard(repo) {
     // Extract repository information
     const name = repo.name;
     const description = repo.description || 'No description available';
-    const language = repo.language;
     const repoUrl = repo.html_url;
     
     // Determine if the repo has a live demo
@@ -68,11 +67,51 @@ function createProjectCard(repo) {
     const techDiv = document.createElement('div');
     techDiv.className = 'project-tech';
     
-    // Add main language if available
-    if (language) {
-        const langSpan = document.createElement('span');
-        langSpan.textContent = language;
-        techDiv.appendChild(langSpan);
+    try {
+        // Fetch all languages used in the repository
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`);
+        
+        if (response.ok) {
+            const languages = await response.json();
+            const languageNames = Object.keys(languages);
+            
+            // Calculate total bytes for percentage calculation
+            const totalBytes = Object.values(languages).reduce((sum, bytes) => sum + bytes, 0);
+            
+            // Sort languages by bytes of code (descending)
+            const sortedLanguages = languageNames.sort((a, b) => languages[b] - languages[a]);
+            
+            // Take top 3 languages or all if less than 3
+            const topLanguages = sortedLanguages.slice(0, 3);
+            
+            // Add language spans to tech div
+            for (const lang of topLanguages) {
+                const percentage = Math.round((languages[lang] / totalBytes) * 100);
+                const langSpan = document.createElement('span');
+                langSpan.textContent = `${lang} ${percentage}%`;
+                techDiv.appendChild(langSpan);
+            }
+            
+            // If no languages were found, add the main language from repo if available
+            if (topLanguages.length === 0 && repo.language) {
+                const langSpan = document.createElement('span');
+                langSpan.textContent = repo.language;
+                techDiv.appendChild(langSpan);
+            }
+        } else if (repo.language) {
+            // Fallback to main language if API call fails
+            const langSpan = document.createElement('span');
+            langSpan.textContent = repo.language;
+            techDiv.appendChild(langSpan);
+        }
+    } catch (error) {
+        console.error(`Error fetching languages for ${name}:`, error);
+        // Fallback to main language on error
+        if (repo.language) {
+            const langSpan = document.createElement('span');
+            langSpan.textContent = repo.language;
+            techDiv.appendChild(langSpan);
+        }
     }
     
     // Add topics as tags if available
@@ -164,13 +203,13 @@ async function loadGitHubProjects() {
 /**
  * Display a specific number of projects
  */
-function displayProjects(container, count) {
+async function displayProjects(container, count) {
     // Determine end index for slicing
     const endIndex = Math.min(loadedProjects + count, allRepos.length);
     
     // Create and append cards for the specified projects
     for (let i = loadedProjects; i < endIndex; i++) {
-        const card = createProjectCard(allRepos[i]);
+        const card = await createProjectCard(allRepos[i]);
         container.appendChild(card);
     }
     
