@@ -46,35 +46,6 @@ NishanBhattarai327.github.io/
 
 The website includes a theme toggle feature that allows visitors to switch between dark and light modes according to their preference. The selected theme is saved in the browser's local storage to persist across visits.
 
-## Setup and Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/NishanBhattarai327/NishanBhattarai327.github.io.git
-   ```
-
-2. Navigate to the project directory:
-   ```
-   cd NishanBhattarai327.github.io
-   ```
-
-3. Open `index.html` in your web browser to view the site locally.
-
-## Development
-
-To make changes to the site:
-
-1. Edit the HTML, CSS, or JavaScript files as needed
-2. Test your changes locally by opening the index.html file in a browser
-3. Commit and push your changes to GitHub to update the live site
-
-## Future Improvements
-
-- Add more detailed project information to the Works section
-- Implement a functional backend for the contact form
-- Add animations and interactive elements
-- Incorporate a blog section
-
 ## Deployment
 
 This site is deployed using GitHub Pages. Any changes pushed to the main branch will be automatically deployed to the live site at [https://nishanbhattarai327.github.io/](https://nishanbhattarai327.github.io/).
