@@ -1,5 +1,10 @@
 // Theme toggle functionality
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize EmailJS with your public key
+    if (window.emailjs) {
+        emailjs.init("eadnQC8LvaDQjBOfI");
+    }
+    
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const htmlElement = document.documentElement;
     
@@ -43,15 +48,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Here you would typically send this data to a server
-            // For now, we'll just log it and show a success message
-            console.log('Form submission:', { name, email, message });
+            // Make sure EmailJS is initialized before sending
+            if (!window.emailjs) {
+                console.error('EmailJS not loaded');
+                alert('Email service not available. Please try again later.');
+                return;
+            }
             
-            // Show success message
-            alert('Thanks for your message! I\'ll get back to you soon.');
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message
+            };
             
-            // Reset form
-            contactForm.reset();
+            // Replace with your actual EmailJS service ID, template ID, and user ID
+            emailjs.send('service_rcsehjs', 'template_ckkv3s5', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response);
+                    alert('Thanks for your message! I\'ll get back to you soon.');
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    alert('Sorry, there was a problem sending your message.');
+                });
         });
+    }
+    
+    // Load GitHub projects if the script is available
+    if (window.githubPortfolio) {
+        window.githubPortfolio.loadGitHubProjects();
+    } else {
+        console.warn('GitHub portfolio integration not available');
     }
 });

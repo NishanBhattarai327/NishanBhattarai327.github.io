@@ -246,6 +246,36 @@ header nav ul li a:hover {
     font-weight: 500;
 }
 
+/* GitHub Projects Loading States */
+.loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #e74c3c;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+/* Animation for loading state */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
 /* Contact Section */
 #contact {
     background-color: var(--bg-secondary);
