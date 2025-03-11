@@ -5,7 +5,13 @@
 
 // Configuration
 const GITHUB_USERNAME = 'NishanBhattarai327';
-const MAX_PROJECTS = 16;  // Maximum number of projects to display
+const MAX_PROJECTS = 60;  // Maximum number of projects to display in total
+const INITIAL_PROJECTS = 5;  // Initial number of projects to display
+const PROJECTS_PER_LOAD = 10;  // Number of projects to load with each "See More" click
+
+// Keep track of loaded projects
+let loadedProjects = 0;
+let allRepos = [];
 
 /**
  * Fetches repositories from GitHub API
@@ -121,37 +127,104 @@ function formatRepoName(name) {
  */
 async function loadGitHubProjects() {
     const projectGrid = document.querySelector('#works .project-grid');
+    const seeMoreBtn = document.getElementById('load-more-projects');
+    
     if (!projectGrid) return;
     
     // Show loading state
     projectGrid.innerHTML = '<div class="loading">Loading projects...</div>';
     
-    // Fetch repositories
-    const repos = await fetchGitHubRepos();
+    // Fetch repositories if not already fetched
+    if (allRepos.length === 0) {
+        allRepos = await fetchGitHubRepos();
+        
+        // Handle empty response
+        if (!allRepos || allRepos.length === 0) {
+            projectGrid.innerHTML = '<div class="error-message">Unable to load projects. Please check back later.</div>';
+            if (seeMoreBtn) seeMoreBtn.style.display = 'none';
+            return;
+        }
+        
+        // Filter out forks and sort by stars
+        allRepos = allRepos
+            .filter(repo => !repo.fork)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count);
+    }
     
     // Clear loading message
     projectGrid.innerHTML = '';
     
-    // Handle empty response
-    if (!repos || repos.length === 0) {
-        projectGrid.innerHTML = '<div class="error-message">Unable to load projects. Please check back later.</div>';
-        return;
+    // Display initial set of projects
+    displayProjects(projectGrid, INITIAL_PROJECTS);
+    
+    // Set up "See More" button
+    setupSeeMoreButton();
+}
+
+/**
+ * Display a specific number of projects
+ */
+function displayProjects(container, count) {
+    // Determine end index for slicing
+    const endIndex = Math.min(loadedProjects + count, allRepos.length);
+    
+    // Create and append cards for the specified projects
+    for (let i = loadedProjects; i < endIndex; i++) {
+        const card = createProjectCard(allRepos[i]);
+        container.appendChild(card);
     }
     
-    // Filter out forks and sort by stars (optional)
-    const filteredRepos = repos
-        .filter(repo => !repo.fork)
-        .sort((a, b) => b.stargazers_count - a.stargazers_count);
+    // Update the count of loaded projects
+    loadedProjects = endIndex;
     
-    // Create project cards (limited to MAX_PROJECTS)
-    filteredRepos.slice(0, MAX_PROJECTS).forEach(repo => {
-        const card = createProjectCard(repo);
-        projectGrid.appendChild(card);
-    });
+    // Update button state
+    updateSeeMoreButtonState();
+}
+
+/**
+ * Set up the "See More" button
+ */
+function setupSeeMoreButton() {
+    const seeMoreBtn = document.getElementById('load-more-projects');
+    if (!seeMoreBtn) return;
+    
+    // Add click event listener
+    seeMoreBtn.addEventListener('click', loadMoreProjects);
+    
+    // Initialize button state
+    updateSeeMoreButtonState();
+}
+
+/**
+ * Load more projects when "See More" is clicked
+ */
+function loadMoreProjects() {
+    const projectGrid = document.querySelector('#works .project-grid');
+    if (!projectGrid) return;
+    
+    displayProjects(projectGrid, PROJECTS_PER_LOAD);
+}
+
+/**
+ * Update the "See More" button state
+ */
+function updateSeeMoreButtonState() {
+    const seeMoreBtn = document.getElementById('load-more-projects');
+    if (!seeMoreBtn) return;
+    
+    // Disable button if all repos are loaded or max limit reached
+    if (loadedProjects >= allRepos.length || loadedProjects >= MAX_PROJECTS) {
+        seeMoreBtn.disabled = true;
+        seeMoreBtn.textContent = 'No More Projects';
+    } else {
+        seeMoreBtn.disabled = false;
+        seeMoreBtn.textContent = 'See More';
+    }
 }
 
 // Export functions
 window.githubPortfolio = {
     loadGitHubProjects,
+    loadMoreProjects,
     fetchGitHubRepos
 };
