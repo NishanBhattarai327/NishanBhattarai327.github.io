@@ -81,4 +81,4 @@ This site is deployed using GitHub Pages. Any changes pushed to the main branch 
 
 ## Author
 
-Nishan Bhattarai - Computer Engineering Student
+Nishan Bhattarai
