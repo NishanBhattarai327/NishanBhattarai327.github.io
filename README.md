@@ -16,8 +16,8 @@ NishanBhattarai327.github.io/
 ├── style/
 │   └── main.css        # CSS styling with dark/light mode support
 ├── script/
-│   └── main.js         # JavaScript functionality for theme toggle
-|   └── github.js       # Fetch and load projects from github.com
+│   ├── github.js       # Fetch and load projects from github.com
+│   └── main.js         # JavaScript functionality for theme toggle and form submission
 └── images/
     └── me.jpg          # Profile picture
 ```
