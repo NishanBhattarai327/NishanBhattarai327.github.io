@@ -51,9 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Make sure EmailJS is initialized before sending
             if (!window.emailjs) {
                 console.error('EmailJS not loaded');
-                alert('Email service not available. Please try again later.');
+                showContactMessage('error', 'Email service not available. Please try again later.');
                 return;
             }
+            
+            // Show sending message
+            showContactMessage('info', 'Sending your message...');
             
             const templateParams = {
                 from_name: name,
@@ -65,12 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             emailjs.send('service_rcsehjs', 'template_ckkv3s5', templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully!', response);
-                    alert('Thanks for your message! I\'ll get back to you soon.');
+                    showContactMessage('success', 'Thanks for your message! I\'ll get back to you soon.');
                     contactForm.reset();
                 })
                 .catch(function(error) {
                     console.error('Email sending failed:', error);
-                    alert('Sorry, there was a problem sending your message.');
+                    showContactMessage('error', 'Sorry, there was a problem sending your message.');
                 });
         });
     }
@@ -82,3 +85,36 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('GitHub portfolio integration not available');
     }
 });
+
+/**
+ * Function to show contact form messages
+ * @param {string} type - Message type: 'success', 'error', or 'info'
+ * @param {string} text - Message text content
+ */
+function showContactMessage(type, text) {
+    const contactMessage = document.getElementById('contact-message');
+    if (!contactMessage) return;
+    
+    // Clear any existing classes
+    contactMessage.className = 'contact-message';
+    
+    // Add appropriate class based on message type
+    contactMessage.classList.add(`contact-message-${type}`);
+    
+    // Set message text
+    contactMessage.textContent = text;
+    
+    // Make sure message is visible
+    contactMessage.style.display = 'block';
+    
+    // If it's a success or info message, hide it after some time
+    if (type === 'success' || type === 'info') {
+        setTimeout(() => {
+            contactMessage.style.opacity = '0';
+            setTimeout(() => {
+                contactMessage.style.display = 'none';
+                contactMessage.style.opacity = '1';
+            }, 500);
+        }, 5000);
+    }
+}

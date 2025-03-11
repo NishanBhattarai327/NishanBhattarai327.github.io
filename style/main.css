@@ -380,6 +380,34 @@ button[type="submit"]:hover {
     opacity: 0.9;
 }
 
+/* Contact message styles */
+.contact-message {
+    display: none;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.contact-message-success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    border-left: 4px solid #27ae60;
+}
+
+.contact-message-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border-left: 4px solid #e74c3c;
+}
+
+.contact-message-info {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+}
+
 /* Footer */
 footer {
     background-color: var(--header-bg);
