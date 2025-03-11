@@ -14,9 +14,9 @@ This portfolio website is designed to present my professional background, showca
 NishanBhattarai327.github.io/
 ├── index.html          # Main HTML file
 ├── style/
-│   └── main.css        # CSS styling
+│   └── main.css        # CSS styling with dark/light mode support
 ├── script/
-│   └── main.js         # JavaScript functionality
+│   └── main.js         # JavaScript functionality for theme toggle
 └── images/
     └── me.jpg          # Profile picture
 ```
@@ -27,6 +27,8 @@ NishanBhattarai327.github.io/
 - **About Section**: Personal introduction and background information
 - **Works Section**: Showcase of projects and portfolio pieces
 - **Contact Section**: Information for reaching out
+- **Dark/Light Mode**: Toggle between light and dark themes
+- **Minimal Design**: Clean, focused layout that emphasizes content
 
 ## Technologies Used
 
@@ -34,6 +36,11 @@ NishanBhattarai327.github.io/
 - CSS3
 - JavaScript
 - GitHub Pages (for hosting)
+- Font Awesome (for icons)
+
+## Dark/Light Mode Feature
+
+The website includes a theme toggle feature that allows visitors to switch between dark and light modes according to their preference. The selected theme is saved in the browser's local storage to persist across visits.
 
 ## Setup and Installation
 
@@ -60,7 +67,7 @@ To make changes to the site:
 ## Future Improvements
 
 - Add more detailed project information to the Works section
-- Implement a contact form in the Contact section
+- Implement a functional backend for the contact form
 - Add animations and interactive elements
 - Incorporate a blog section
 
