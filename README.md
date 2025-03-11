@@ -70,6 +70,3 @@ This site is deployed using GitHub Pages. Any changes pushed to the main branch 
 
 Nishan Bhattarai - Computer Engineering Student
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
