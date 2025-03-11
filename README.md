@@ -29,6 +29,8 @@ NishanBhattarai327.github.io/
 - **Contact Section**: Information for reaching out
 - **Dark/Light Mode**: Toggle between light and dark themes
 - **Minimal Design**: Clean, focused layout that emphasizes content
+- **GitHub Repositories Integration**: Display of GitHub repositories
+- **EmailJS Contact Form**: Functional contact form using EmailJS
 
 ## Technologies Used
 
@@ -37,6 +39,7 @@ NishanBhattarai327.github.io/
 - JavaScript
 - GitHub Pages (for hosting)
 - Font Awesome (for icons)
+- EmailJS (for contact form)
 
 ## Dark/Light Mode Feature
 
